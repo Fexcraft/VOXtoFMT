@@ -5,7 +5,6 @@ public class StrippedChunk {
 	private int sizeX;
 	private int sizeY; //Here the y Direction is the gravity direction!
 	private int sizeZ;
-	
 	private Voxel[] originalVoxels;
 	
 	public StrippedChunk() {
@@ -23,8 +22,8 @@ public class StrippedChunk {
 	
 	public void setSize(int sizeX, int sizeY, int sizeZ) {
 		this.sizeX = sizeX;
-		this.sizeZ = sizeZ; //Swap is intendet!! Dont ever change it, it is to make the y-z switch
 		this.sizeY = sizeY;
+		this.sizeZ = sizeZ;
 	}
 	
 	public int getSizeX() {

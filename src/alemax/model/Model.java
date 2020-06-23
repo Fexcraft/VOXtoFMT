@@ -3,7 +3,6 @@ package alemax.model;
 import java.util.ArrayList;
 
 import org.joml.Matrix3f;
-import org.joml.Vector3d;
 import org.joml.Vector3f;
 import org.joml.Vector4f;
 
@@ -12,10 +11,8 @@ import alemax.vox.*;
 public class Model {
 	
 	private ArrayList<StrippedChunk> initialChunks;
-	
 	public ArrayList<Chunk> chunks;
 	public Vector4f[] colors;
-	
 	private VoxChunkMain main;
 	
 	public Model(byte[] voxData) {
@@ -61,63 +58,6 @@ public class Model {
 				}
 			}
 		}
-		
-		
-		/*
-		for(VoxChunk voxChunk : main.childrenChunks) {
-			if(voxChunk instanceof VoxChunkNSHP) {
-				
-				//ArrayList<Vector3D> translations = new ArrayList<Vector3D>();
-				//ArrayList<RealMatrix> rotations = new ArrayList<RealMatrix>();
-				ArrayList<Vector3d> translations = new ArrayList<Vector3d>();
-				ArrayList<Matrix3f> rotations = new ArrayList<Matrix3f>();
-				
-				int nodeID = ((VoxChunkNSHP) voxChunk).nodeID;
-				int modelID = ((VoxChunkNSHP) voxChunk).modelIDs[0];
-				
-				getHigherNodes(nodeID, translations, rotations);
-				
-				/*
-				Vector3D translation = new Vector3D(0, 0, 0);
-				for(Vector3D trans : translations) {
-					translation.add(trans);
-				} */
-		/*
-				Vector3d translation = new Vector3d(0, 0, 0);
-				for(Vector3d trans : translations) {
-					translation.add(trans);
-				}
-				System.out.println(translations.get(0).x + " " + translations.get(0).y + " " +translations.get(0).z + "\t" +translations.get(1).x + " " +translations.get(1).y + " " + translations.get(1).z);
-				
-				//RealMatrix rotation = null;
-				Matrix3f rotation = null;
-				if(rotations.size() == 0) {
-					//double[][] bytes = {{0,0,0},{0,0,0},{0,0,0}};
-					//rotation = MatrixUtils.createRealMatrix(bytes);
-					rotation = new Matrix3f(0, 0, 0, 0, 0, 0, 0, 0, 0);
-				} else {
-					Collections.reverse(rotations); 
-					rotation = rotations.get(0);
-					if(rotations.size() > 1) {
-						for(int i = 1; i < rotations.size(); i++) {
-							//rotation = rotation.multiply(rotations.get(i));
-							rotation = rotation.mul(rotations.get(i));
-						}			
-					}
-				}
-				rotation.transpose();
-				
-				chunks.add(new Chunk());
-				chunks.get(chunks.size() - 1).setSize(initialChunks.get(modelID).getSizeX(), initialChunks.get(modelID).getSizeY(), initialChunks.get(modelID).getSizeZ());
-				chunks.get(chunks.size() - 1).setVoxels(initialChunks.get(modelID).getVoxels());
-				
-				chunks.get(chunks.size() - 1).setTranslation((int) Math.round(translation.x), (int) Math.round(translation.y), (int) Math.round(translation.z));
-				chunks.get(chunks.size() - 1).setRotation(rotation);
-				chunks.get(chunks.size() - 1).bake();
-				
-			}
-		}
-		*/
 	}
 	
 	private void goDownNodes(int nodeID, Vector3f translation, Matrix3f rotation) {
@@ -176,45 +116,4 @@ public class Model {
 		}
 	}
 	
-	
-	//private void getHigherNodes(int nodeID, ArrayList<vector3D> translations, ArrayList<RealMatrix> rotations) {
-	private void getHigherNodes(int nodeID, ArrayList<Vector3d> translations, ArrayList<Matrix3f> rotations) {
-		for(VoxChunk voxChunk : main.childrenChunks) {
-			if(voxChunk instanceof VoxChunkNTRN) {
-				if(((VoxChunkNTRN) voxChunk).childNodeID == nodeID) {
-					if(((VoxChunkNTRN) voxChunk).frameAttributes[0].map.containsKey("_r")) {
-						String rotation = ((VoxChunkNTRN) voxChunk).frameAttributes[0].map.get("_r").string;
-						
-						byte rotationByte = (byte) Integer.parseInt(rotation);
-						VoxRotation rot = new VoxRotation(rotationByte);
-						rotations.add(rot.rotMatrix);
-					}
-					
-					if(((VoxChunkNTRN) voxChunk).frameAttributes[0].map.containsKey("_t")) {
-						String translation = ((VoxChunkNTRN) voxChunk).frameAttributes[0].map.get("_t").string;
-						
-						//HERE!!!
-						
-						String[] translationSplit = translation.split(" ");
-						//translations.add(new Vector3D(Integer.parseInt(translationSplit[0]), Integer.parseInt(translationSplit[1]), Integer.parseInt(translationSplit[2]))); 
-						translations.add(new Vector3d(Integer.parseInt(translationSplit[0]), Integer.parseInt(translationSplit[1]), Integer.parseInt(translationSplit[2]))); 
-					}
-					
-					getHigherNodes(((VoxChunkNTRN) voxChunk).nodeID, translations, rotations);
-					
-					break;
-				}
-			}
-			if(voxChunk instanceof VoxChunkNGRP) {
-				for(int i = 0; i < ((VoxChunkNGRP) voxChunk).childNodeIDs.length; i++) {
-					if(((VoxChunkNGRP) voxChunk).childNodeIDs[i] == nodeID) {
-						
-						getHigherNodes(((VoxChunkNGRP) voxChunk).nodeID, translations, rotations);
-						
-						break;
-					}
-				}
-			}
-		}
-	}
 }

@@ -22,7 +22,6 @@ public class VoxRotation {
 		boolean e = (i & 0x10) != 0;
 		boolean f = (i & 0x20) != 0;
 		boolean g = (i & 0x40) != 0;
-		//boolean h = (rotation & 0x80) != 0;
 		
 		byte indexFirstRow = 0;
 		if(a) indexFirstRow = 1;
@@ -51,33 +50,7 @@ public class VoxRotation {
 		else if(!indexTwo) thirdRow[1] = thirdNumber;
 		else if(!indexThree) thirdRow[2] = thirdNumber;
 		
-		//float[][] matrixData = {firstRow, secondRow, thirdRow};
-		
-		//rotMatrix = MatrixUtils.createRealMatrix(matrixData);
 		rotMatrix = new Matrix3f(firstRow[0], firstRow[1], firstRow[2], secondRow[0], secondRow[1], secondRow[2], thirdRow[0], thirdRow[1], thirdRow[2]);
 	}
-	
-	
-	/*
-	private RealMatrix getXMatrix(int rot) {
-		double[][] matrixData = {{1,0,0}, {0,Math.cos(rot * Math.PI / 2),-Math.sin(rot * Math.PI / 2)}, {0,Math.sin(rot * Math.PI / 2),Math.cos(rot * Math.PI / 2)}};
-		RealMatrix m = MatrixUtils.createRealMatrix(matrixData);
-		return m;
-	}
-	
-	private RealMatrix getYMatrix(int rot) {
-		double[][] matrixData = {{Math.cos(rot * Math.PI / 2),0,Math.sin(rot * Math.PI / 2)}, {0,1,0}, {-Math.sin(rot * Math.PI / 2),0,Math.cos(rot * Math.PI / 2)}};
-		RealMatrix m = MatrixUtils.createRealMatrix(matrixData);
-		return m;
-	}
-	
-	private RealMatrix getZMatrix(int rot) {
-		double[][] matrixData = {{Math.cos(rot * Math.PI / 2),-Math.sin(rot * Math.PI / 2),0}, {Math.sin(rot * Math.PI / 2),Math.cos(rot * Math.PI / 2),0}, {0,0,1}};
-		RealMatrix m = MatrixUtils.createRealMatrix(matrixData);
-		return m;
-	}
-	*/
-	
-	
 	
 }

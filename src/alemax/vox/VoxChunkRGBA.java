@@ -12,7 +12,6 @@ public class VoxChunkRGBA extends VoxChunk {
 		super(voxData, index);
 		index += 12;
 		palette = new Vector4f[256];
-		
 		for(int i = 0; i < palette.length; i++) {
 			palette[i] = new Vector4f();
 			palette[i].x = ByteHandler.getInt8(ByteHandler.getSubArray(voxData, index++, 1));
@@ -20,7 +19,6 @@ public class VoxChunkRGBA extends VoxChunk {
 			palette[i].z = ByteHandler.getInt8(ByteHandler.getSubArray(voxData, index++, 1));
 			palette[i].w = ByteHandler.getInt8(ByteHandler.getSubArray(voxData, index++, 1));
 		}
-		
 	}
 	
 }

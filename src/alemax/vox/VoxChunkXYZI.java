@@ -10,11 +10,8 @@ public class VoxChunkXYZI extends VoxChunk {
 	public VoxChunkXYZI(byte[] voxData, int index) {
 		super(voxData, index);
 		index += 12;
-		
 		voxels = new Voxel[ByteHandler.getInt32(ByteHandler.getSubArray(voxData, index, 4))]; 
-		
 		index += 4;
-		
 		for(int i = 0; i < voxels.length; i++) {
 			voxels[i] = new Voxel();
 			voxels[i].x = ByteHandler.getInt8(ByteHandler.getSubArray(voxData, index++, 1));
@@ -23,8 +20,6 @@ public class VoxChunkXYZI extends VoxChunk {
 			voxels[i].i = ByteHandler.getInt8(ByteHandler.getSubArray(voxData, index++, 1)) - 1;
 			//System.out.println(voxels[i].i);
 		}
-		
 	}
-	
 	
 }

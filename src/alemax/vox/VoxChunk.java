@@ -15,21 +15,16 @@ public abstract class VoxChunk extends VoxPart {
 	public VoxChunk(byte[] voxData, int index) {
 		super(voxData, index);
 		int startIndex = index;
-		
 		int byteSize = 12;
-		
 		chunkID = ByteHandler.getString(ByteHandler.getSubArray(voxData, index, 4));
 		contentSize = ByteHandler.getInt32(ByteHandler.getSubArray(voxData, index + 4, 4));
 		childrenSize = ByteHandler.getInt32(ByteHandler.getSubArray(voxData, index + 8, 4));
-		
 		byteSize += contentSize;
-		
 		index += (contentSize + 12);
 		childrenChunks = new ArrayList<VoxChunk>();
 		while ((index - (contentSize + 8)) < childrenSize) {
 			String chunkID = ByteHandler.getString(ByteHandler.getSubArray(voxData, index, 4));
 			//System.out.println(chunkID + "\t" + index);
-			
 			VoxChunk childChunk = null;
 			switch(chunkID) {
 			case "MAIN":
@@ -68,17 +63,12 @@ public abstract class VoxChunk extends VoxPart {
 			default:
 				childChunk = new VoxChunkMain(voxData, index);
 				System.err.println(chunkID);
-			}	
-			
-			if(childChunk != null)
-				childrenChunks.add(childChunk);
-			
+			}
+			if(childChunk != null) childrenChunks.add(childChunk);
 			byteSize += childChunk.rawData.length;
 			index += childChunk.rawData.length;
 		}
-		
 		this.rawData = ByteHandler.getSubArray(voxData, startIndex, byteSize);
-		
 	}
 	
 }
