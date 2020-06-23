@@ -1,6 +1,7 @@
 package alemax.util;
 
 import java.io.BufferedReader;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
@@ -9,12 +10,13 @@ public class ShaderHandler {
 	public String loadShader(String path) {
 		StringBuilder shader = new StringBuilder();
 		try {
-			BufferedReader reader = new BufferedReader(new InputStreamReader(this.getClass().getResourceAsStream(path)));
+			BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(path)));
 			String line = "";
 
 			while((line = reader.readLine()) != null) {
 				shader.append(line).append("\n");
 			}
+			reader.close();
 			
 		} catch (IOException e) {
 			e.printStackTrace();

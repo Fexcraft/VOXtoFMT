@@ -8,9 +8,7 @@ import alemax.util.FileHandler;
 public class Main {
 
 	public static void main(String[] args) {
-
-		FileHandler fileHandler = new FileHandler();
-		Model model = new Model(fileHandler.readVoxFile("ice2.vox"));
+		Model model = new Model(FileHandler.readVoxFile("./Rail.vox"));
 
 		Window window = new Window();
 		window.init();

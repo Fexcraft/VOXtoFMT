@@ -1,7 +1,8 @@
 package alemax.vox;
 
-import alemax.util.ByteHandler;
 import org.joml.Vector4f;
+
+import alemax.util.ByteHandler;
 
 public class VoxChunkRGBA extends VoxChunk {
 	
@@ -19,7 +20,6 @@ public class VoxChunkRGBA extends VoxChunk {
 			palette[i].z = ByteHandler.getInt8(ByteHandler.getSubArray(voxData, index++, 1));
 			palette[i].w = ByteHandler.getInt8(ByteHandler.getSubArray(voxData, index++, 1));
 		}
-		
 		
 	}
 	

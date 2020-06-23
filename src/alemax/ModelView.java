@@ -1,11 +1,16 @@
 package alemax;
 
-import alemax.model.Model;
-import alemax.opengl.*;
-import alemax.util.ModelUtil;
 import org.joml.Vector3f;
 import org.joml.Vector4f;
 import org.lwjgl.glfw.GLFW;
+
+import alemax.model.Model;
+import alemax.opengl.Camera;
+import alemax.opengl.ModelRenderer;
+import alemax.opengl.RenderableModel;
+import alemax.opengl.Shader;
+import alemax.opengl.Window;
+import alemax.util.ModelUtil;
 
 public class ModelView {
 	
@@ -18,7 +23,7 @@ public class ModelView {
 	
 	public ModelView(Window window) {
 		this.window = window;
-		this.shader = new Shader("/shaders/vertex.glsl", "/shaders/fragment.glsl");
+		this.shader = new Shader("./resources/shaders/vertex.glsl", "./resources/shaders/fragment.glsl");
 		shader.compile();
 		this.renderer = new ModelRenderer(shader);
 
@@ -46,14 +51,14 @@ public class ModelView {
 		this.model.loadToMemory();
 	}
 
-	private float time;
+	//private float time;
 
 	private double lastMouseX;
 	private double lastMouseY;
 	private boolean isDown = true;
 
 	public void update() {
-		time = System.nanoTime() / 1000000000.0f;
+		//time = System.nanoTime() / 1000000000.0f;
 
 		//model.rotation = new Vector3f(time, time, time);
 

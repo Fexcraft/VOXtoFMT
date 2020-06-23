@@ -1,22 +1,13 @@
 package alemax.model;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
 import org.joml.Matrix3f;
 import org.joml.Vector3d;
 import org.joml.Vector3f;
-
-import alemax.vox.VoxChunk;
-import alemax.vox.VoxChunkMain;
-import alemax.vox.VoxChunkNGRP;
-import alemax.vox.VoxChunkNSHP;
-import alemax.vox.VoxChunkNTRN;
-import alemax.vox.VoxChunkRGBA;
-import alemax.vox.VoxChunkSize;
-import alemax.vox.VoxChunkXYZI;
-import alemax.vox.VoxRotation;
 import org.joml.Vector4f;
+
+import alemax.vox.*;
 
 public class Model {
 	
